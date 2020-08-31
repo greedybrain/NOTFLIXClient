@@ -24,13 +24,11 @@ class AllMoviesContainer extends Component {
         this.thirdPartyBaseUrl = 'http://www.omdbapi.com/?'
     }
 
-    componentDidMount() {
-        axios(`${this.baseUrl}${this.allMyBackendMovies}`)
-            .then(response => {
-                this.setState({
-                    movies: response.data.movies.data
-                })
-            })
+    async componentDidMount() {
+        const response = await axios(`${this.baseUrl}${this.allMyBackendMovies}`)
+        this.setState({
+            movies: response.data.movies.data
+        })
     }
 
     // HANDLE SEARCH MOVIE BY TITLE AND YEAR 
@@ -67,7 +65,7 @@ class AllMoviesContainer extends Component {
 
     addMovieInfo = async (res) => {
         const response = await axios.post(
-            `http://localhost:3001/api/v1/add_movie_home`, 
+            `${this.baseUrl}${this.movieToHome}`, 
             {
                 title: res.data.Title,
                 actors: res.data.Actors,
