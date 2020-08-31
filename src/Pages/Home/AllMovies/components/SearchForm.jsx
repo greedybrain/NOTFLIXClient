@@ -20,6 +20,10 @@ class SearchForm extends Component {
         let { title, year } = this.state
         this.props.validateEndpointThenRequestMovieInfo(title, year)
         event.preventDefault()
+        this.setState({
+            title: '',
+            year: ''
+        })
     }
 
     render() {
