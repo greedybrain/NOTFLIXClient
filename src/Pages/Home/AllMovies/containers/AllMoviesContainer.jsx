@@ -11,28 +11,17 @@ class AllMoviesContainer extends Component {
         this.state = {
             movies: [],
             title: '',
-            year: '',
-            movieInfo: {
-                title: '',
-                actors: '',
-                genre: '',
-                language: '',
-                country: '',
-                runtime: '',
-                releaseDate: '',
-                plot: '',
-                poster: '',
-                imdbRating: '', 
-                production: ''
-            }
+            year: ''
         }
 
-        // ENDPOINTS 
-        this.apiKey = '691b7eac'
+        // MY ENDPOINTS
         this.baseUrl = 'http://localhost:3001/'
+        this.allMyBackendMovies = 'api/v1/movies'
+        this.movieToHome = 'api/v1/add_movie_home'
+
+        // THIRD PARTY ENDPOINTS 
+        this.apiKey = '691b7eac'
         this.thirdPartyBaseUrl = 'http://www.omdbapi.com/?'
-        this.allMyBackendMovies = 'api/v1/movies'   
-        this.results = 'api/v1/results'
     }
 
     componentDidMount() {
@@ -44,46 +33,56 @@ class AllMoviesContainer extends Component {
             })
     }
 
+    // HANDLE SEARCH MOVIE BY TITLE AND YEAR 
     movieByTitleAndYear = (title, year)  => {
         return `${this.thirdPartyBaseUrl}t=${title}&y=${year}&plot=full&apikey=${this.apiKey}`
-}
-    
+    }
+
+    // HANDLE SEARCH MOVIE BY TITLE
     movieByTitle = title => {
         return `${this.thirdPartyBaseUrl}t=${title}&plot=full&apikey=${this.apiKey}`
     }
 
-    validateEndpointThenRequestMovieInfo = (title, year) => {
+    // REQUESTING ADD MOVIE TO DATABASE ENDPOINT 
+    addMovieToHomePath = () => {
+        return `${this.baseUrl}${this.movieToHome}`
+    }
+
+    // VALIDATES ENDPOINT PARAMETERS BEFORE INFO IS RECEIVED
+    validateEndpointThenRequestMovieInfo = async (title, year) => {
+        let response;
         if (title === '') {
             alert("Please enter a title")
             return
         }
         if (title !== '' && year === '') {
-            axios(`${this.movieByTitle(title)}`)
-                .then(response => {
-                    this.addMovieInfoToState(response)
-                })
+            response = await axios(`${this.movieByTitle(title)}`)
+            this.addMovieInfo(response)
         }
         if (title !== '' && year !== '') {
-            axios(`${this.movieByTitleAndYear(title, year)}`)
-                .then(response => {
-                    this.addMovieInfoToState(response)
-                })
+            response = await axios(`${this.movieByTitleAndYear(title, year)}`)
+            this.addMovieInfo(response)
         }
     }
 
-    addMovieInfoToState = (response) => {
-        this.setState({
-            movieInfo: {
-                title: response.data.Title,
-                actors: response.data.Actors,
-                genre: response.data.Genre,
-                language: response.data.Language,
-                country: response.data.Country,
-                runtime: response.data.Runtime,
-                imdbRating: response.data.imdbRating,
-                production: response.data.Production
-            }
-        })
+    addMovieInfo = async (res) => {
+        const response = await axios.post(
+            `http://localhost:3001/api/v1/add_movie_home`, 
+            {
+                title: res.data.Title,
+                actors: res.data.Actors,
+                genre: res.data.Genre,
+                language: res.data.Language,
+                country: res.data.Country,
+                plot: res.data.Plot,
+                poster: res.data.Poster,
+                runtime: res.data.Runtime,
+                release_year: res.data.Released,
+                imdb_rating: res.data.imdbRating,
+                production: res.data.Production
+            },
+        )
+        console.log(response)
     }
 
     render() {
