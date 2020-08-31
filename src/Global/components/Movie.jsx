@@ -1,18 +1,39 @@
 import React from 'react'
 
-const Movie = ({movie}) => {
+const Movie = ({ movie }) => {
     return (
         <li key={movie.id} className="movie-info">
-            <div className="cover">
-                <img src={movie.attributes.poster} alt="Hulk"/>
+            <div className="poster">
+                <img src={movie.attributes.poster} alt={ movie.attributes.title }/>
             </div>
-            <div className="meta-data">
-                <h1>{movie.attributes.title}</h1>
-                <h3>{movie.attributes.release_year}</h3>
-                <h3>{movie.attributes.plot}</h3>
+            <div className="content">
+                <p>{movie.attributes.title}</p>
+                <p>{movie.attributes.genre}</p>
+                <p>{movie.attributes.country}</p>
+                <p>{movie.attributes.actors}</p>
+                <p>{movie.attributes.imdb_rating}</p>
+                <p>{movie.attributes.language}</p>
+                <p>{movie.attributes.plot}</p>
+                <p>{movie.attributes.production}</p>
+                <p>{movie.attributes.runtime}</p>
+                <p>{movie.attributes.release_year}</p>
             </div>
         </li>
     )
 }
 
 export default Movie
+
+// movieInfo: {
+//     title: '',
+//     actors: '',
+//     genre: '',
+//     language: '',
+//     country: '',
+//     runtime: '',
+//     releaseDate: '',
+//     plot: '',
+//     poster: '',
+//     imdbRating: '', 
+//     production: ''
+// }
