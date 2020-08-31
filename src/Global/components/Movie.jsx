@@ -23,17 +23,3 @@ const Movie = ({ movie }) => {
 }
 
 export default Movie
-
-// movieInfo: {
-//     title: '',
-//     actors: '',
-//     genre: '',
-//     language: '',
-//     country: '',
-//     runtime: '',
-//     releaseDate: '',
-//     plot: '',
-//     poster: '',
-//     imdbRating: '', 
-//     production: ''
-// }
