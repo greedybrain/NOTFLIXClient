@@ -1,13 +1,41 @@
 header {
     display: flex;
     align-items: center;
-    padding: 20px 0 0 30px;
+    justify-content: space-between;
+    padding: 0 30px;
     height: 10vh;
     width: 100%;
     div.logo-area {
         width: 150px;
+        display: flex;
+        align-items: center;
         img {
             width: 100%;
+        }
+        div.home {
+            margin-left: 10px;
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+    div.nav {
+        ul {
+            display: flex;
+            align-items: center;
+            li {
+                margin-left: 20px;
+                padding: 10px 20px;
+                border-radius: 3px;
+                background-color: #d6020d;
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
         }
     }
 }
