@@ -2,7 +2,12 @@ li.movie-info {
     display: flex;
     cursor: pointer;
     div.poster {
-        width: 150px;
+        width: 175px;
+        p {
+            text-align: center;
+            margin-bottom: 5px;
+            color: #eeeeee;
+        }
         img {
             width: 100%;
         }
@@ -10,5 +15,20 @@ li.movie-info {
     div.content {
         color: #fff;
         display: none;
+    }
+}
+
+@keyframes posterAnimation {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: .9;
+    }
+    50% {
+        opacity: .8;
+    }
+    100% {
+        opacity: .7;
     }
 }
