@@ -6,7 +6,13 @@ li.movie-info {
 }
 
 li.movie-info div.poster {
-  width: 150px;
+  width: 175px;
+}
+
+li.movie-info div.poster p {
+  text-align: center;
+  margin-bottom: 5px;
+  color: #eeeeee;
 }
 
 li.movie-info div.poster img {
@@ -16,4 +22,34 @@ li.movie-info div.poster img {
 li.movie-info div.content {
   color: #fff;
   display: none;
+}
+
+@-webkit-keyframes posterAnimation {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: .9;
+  }
+  50% {
+    opacity: .8;
+  }
+  100% {
+    opacity: .7;
+  }
+}
+
+@keyframes posterAnimation {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: .9;
+  }
+  50% {
+    opacity: .8;
+  }
+  100% {
+    opacity: .7;
+  }
 }
