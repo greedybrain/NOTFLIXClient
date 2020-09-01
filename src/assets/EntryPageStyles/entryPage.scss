@@ -28,15 +28,109 @@ div.entry-page-fg {
     left: 0;
     width: 100%;
     height: 100vh;
-    header {
-        border: 1px solid #fff;
+    div.entry-forms {
+        height: 90vh;
         display: flex;
-        align-items: center;
-        padding: 20px 0 0 30px;
-        div.logo-area {
-            width: 150px;
-            img {
-                width: 100%;
+        justify-content: center;
+        form {
+            border-radius: 5px;
+            width: 450px;
+            height: 650px;
+            margin: 20px 0;
+            background-color: rgba(0, 0, 0, 0.623);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            div.fields-wrapper {
+                width: 70%;
+                margin-top: 60px;
+                h1 {
+                    color: #fff;
+                    margin-bottom: 30px;
+                }
+                div.username,
+                div.email,
+                div.password {
+                    border-radius: 5px;
+                    width: 100%;
+                    height: 55px;
+                    input {
+                        width: 100%;
+                        height: 100%;
+                        outline: none;
+                        border: none;
+                        font-size: 1rem;
+                        padding-left: 20px;
+                        border-radius: 4px;
+                        background-color: #333;
+                        color: #fff;
+                    }
+                    &:not(:first-child) {
+                        margin-top: 15px;
+                    }
+                }
+                div.username,
+                div.email,
+                div.password {
+                    border-bottom: 2px solid red;
+                }
+                div.submit-btn {
+                    margin-top: 40px;
+                    border-radius: 5px;
+                    height: 55px;
+                    button {
+                        width: 100%;
+                        height: 100%;
+                        font-size: 1rem;
+                        background-color: #e50914;
+                        border: none;
+                        border-radius: 4px;
+                        color: #fff;
+                        cursor: pointer;
+                    }
+                }
+                div.remember-help {
+                    margin-top: 15px;
+                    color: #fff;
+                    font-size: .8rem;
+                    display: flex;
+                    justify-content: space-between;
+                    div.remember {
+                        label {
+                            position: relative;
+                            left: 5px;
+                            bottom: 1px;
+                        }
+                    }
+                    div.help {
+                        color: #7a7a7a;
+                        cursor: pointer;
+                    }
+                }
+                div.signup-instead {
+                    display: flex;
+                    width: 100%;
+                    margin-top: 20px;
+                    div.new-to-netflix {
+                        color: #7a7a7a;
+                    }
+                    div.signup {
+                        color: #fff;
+                        margin-left: 5px;
+                        &:hover {
+                            text-decoration: underline;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                div.captcha {
+                    color: #7a7a7a;
+                    margin-top: 20px;
+                    font-size: .8rem;
+                    span.learn-more {
+                        color: #0049e7;
+                    }
+                }
             }
         }
     }

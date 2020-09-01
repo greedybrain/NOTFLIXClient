@@ -1,0 +1,19 @@
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px 0 0 30px;
+  height: 10vh;
+  width: 100%;
+}
+
+header div.logo-area {
+  width: 150px;
+}
+
+header div.logo-area img {
+  width: 100%;
+}
