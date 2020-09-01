@@ -26,7 +26,7 @@ const SearchForm = ({ validateEndpointThenRequestMovieInfo }) => {
                     <input
                         onChange={handleTitleChange}
                         type="text"
-                        placeholder="Movie Title"
+                        placeholder="Title"
                         name="title"
                         value={title}
                     />
@@ -35,13 +35,13 @@ const SearchForm = ({ validateEndpointThenRequestMovieInfo }) => {
                     <input 
                         onChange={handleYearChange}
                         type="text" 
-                        placeholder="Release Year"
+                        placeholder="Year (Optional)"
                         name="year"
                         value={year}
                     />
                 </div>
                 <div className="submit-button">
-                    <button type="submit">Search</button>
+                    <button type="submit"><i className="fas fa-search"></i></button>
                 </div>
             </form>
     )
