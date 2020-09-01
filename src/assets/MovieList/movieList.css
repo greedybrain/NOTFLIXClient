@@ -3,5 +3,6 @@ ul.movie-list {
   display: grid;
   -ms-grid-columns: (minmax(120px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 3px;
+  gap: 5px;
+  grid-row-gap: 20px;
 }
