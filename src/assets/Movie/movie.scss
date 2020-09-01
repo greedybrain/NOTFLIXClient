@@ -1,0 +1,14 @@
+li.movie-info {
+    display: flex;
+    cursor: pointer;
+    div.poster {
+        width: 150px;
+        img {
+            width: 100%;
+        }
+    }
+    div.content {
+        color: #fff;
+        display: none;
+    }
+}
