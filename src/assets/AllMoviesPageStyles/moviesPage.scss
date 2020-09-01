@@ -1,20 +1,62 @@
 div.movies-page-wrapper {
-    background-color: #000;
+    background-color: #242424;
     header {
         padding-top: 3px;
     }
     div.movies-container {
         div.homepage {
             div.search-form {
-                border: 1px solid #fff;
-                height: 10vh;
+                position: relative;
+                display: flex;
+                align-items: center;
+                height: 8vh;
+                justify-content: space-around;
+                padding: 0 75px;
                 form {
                     display: flex;
+                    div {
+                        width: 250px;
+                        height: 45px;
+                        border-radius: 30px;
+                        border: 1px solid #eeeeee;
+                        input {
+                            width: 100%;
+                            height: 100%;
+                            outline: none;
+                            border: none;
+                            border-radius: 40px;
+                            background-color: #242424;
+                            color: #fff;
+                            font-size: 1rem;
+                            text-align: center;
+                            &::placeholder {
+                                font-size: .9rem;
+                            }
+                        }
+                        &:not(:first-child) {
+                            margin-left: 15px;
+                        }
+                    }
+                    div.submit-button {
+                        width: 45px;
+                        border: 2px solid #fff;
+                        button {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 19px;
+                            outline: none;
+                            border: none;
+                            background-color: #242424;
+                            color: #fff;
+                            cursor: pointer;
+                        }
+                    }
                 }
             }
             div.home-movie-list {
-                height: 80vh;
-                padding: 0 30px;
+                height: 82vh;
+                padding: 30px;
+                overflow-y: scroll;
             }
         }
     }
