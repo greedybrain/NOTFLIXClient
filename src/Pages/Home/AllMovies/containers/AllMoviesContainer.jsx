@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import MovieList from '../../../../Global/components/MovieList'
 import SearchForm from '../components/SearchForm'
+import Header from '../../../../Global/components/Header'
+import '../../../../assets/AllMoviesPageStyles/moviesPage.css'
 
 class AllMoviesContainer extends Component {
     constructor(props) {
@@ -86,12 +88,17 @@ class AllMoviesContainer extends Component {
     render() {
         let { movies } = this.state
         return (
-            <div className="homepage">
-                <div className="search-form">
-                    <SearchForm validateEndpointThenRequestMovieInfo={this.validateEndpointThenRequestMovieInfo}/>
-                </div>
-                <div className="home-movie-list">
-                    <MovieList movies={movies} />
+            <div className="movies-page-wrapper">
+                <Header />
+                <div className="movies-container">
+                    <div className="homepage">
+                        <div className="search-form">
+                            <SearchForm validateEndpointThenRequestMovieInfo={this.validateEndpointThenRequestMovieInfo}/>
+                        </div>
+                        <div className="home-movie-list">
+                            <MovieList movies={movies} />
+                        </div>
+                    </div>
                 </div>
             </div>
         )
