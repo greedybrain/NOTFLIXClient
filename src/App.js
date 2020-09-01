@@ -2,10 +2,12 @@ import React from 'react';
 import AllMoviesContainer from './Pages/Home/AllMovies/containers/AllMoviesContainer';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import EntryPage from './Pages/LoginSIgnupPage/containers/EntryPage';
+import Header from './Global/components/Header';
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Router>
         <Switch>
 
