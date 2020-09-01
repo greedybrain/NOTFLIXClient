@@ -9,6 +9,10 @@
     border-bottom: 1px solid #fff;
 }
 
+li {
+    list-style-type: none;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
 }
