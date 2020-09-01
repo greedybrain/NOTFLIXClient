@@ -1,0 +1,19 @@
+li.movie-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+}
+
+li.movie-info div.poster {
+  width: 150px;
+}
+
+li.movie-info div.poster img {
+  width: 100%;
+}
+
+li.movie-info div.content {
+  color: #fff;
+  display: none;
+}
