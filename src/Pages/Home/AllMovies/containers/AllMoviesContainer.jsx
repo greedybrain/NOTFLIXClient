@@ -65,7 +65,7 @@ class AllMoviesContainer extends Component {
         }
     }
 
-    addMovieInfo = async (res) => {
+    addMovieInfo = async res => {
         const response = await axios.post(
             `${this.baseUrl}${this.movieToHome}`, 
             {
@@ -82,7 +82,10 @@ class AllMoviesContainer extends Component {
                 production: res.data.Production
             },
         )
-        console.log(response)
+        const movie = response.data.movie.data
+        this.setState(prevState => ({
+                movies: [movie, ...prevState.movies]
+        }))
     }
 
     render() {
