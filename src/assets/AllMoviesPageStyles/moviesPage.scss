@@ -1,0 +1,21 @@
+div.movies-page-wrapper {
+    background-color: #000;
+    header {
+        padding-top: 3px;
+    }
+    div.movies-container {
+        div.homepage {
+            div.search-form {
+                border: 1px solid #fff;
+                height: 10vh;
+                form {
+                    display: flex;
+                }
+            }
+            div.home-movie-list {
+                height: 80vh;
+                padding: 0 30px;
+            }
+        }
+    }
+}
