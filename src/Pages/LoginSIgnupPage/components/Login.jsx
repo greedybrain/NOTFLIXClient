@@ -1,7 +1,6 @@
 import React, { useState, } from 'react'
-import Signup from './Signup'
 
-const Login = ({ toggleForm }) => {
+const Login = ({ toggleForm, handleLoginRequest, history, loginStatus }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -14,6 +13,8 @@ const Login = ({ toggleForm }) => {
     }
 
     const handleSubmit = event => {
+        handleLoginRequest(email, password)
+        history.replace('/all_movies')
         event.preventDefault()
     }
 
