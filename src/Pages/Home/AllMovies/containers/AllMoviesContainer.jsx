@@ -4,6 +4,10 @@ import MovieList from '../../../../Global/components/MovieList'
 import SearchForm from '../components/SearchForm'
 import Header from '../../../../Global/components/Header'
 import '../../../../assets/AllMoviesPageStyles/moviesPage.css'
+import SortASCButton from '../components/SortASCButton'
+import SortDESCButton from '../components/SortDESCButton'
+import SortOldestButton from '../components/SortOldestButton'
+import SortMostRecent from '../components/SortMostRecent'
 
 class AllMoviesContainer extends Component {
     constructor(props) {
@@ -26,6 +30,7 @@ class AllMoviesContainer extends Component {
         this.thirdPartyBaseUrl = 'http://www.omdbapi.com/?'
     }
 
+    // FETCHING ALL MOVIES IN DATABASE ON APPLICATION START
     async componentDidMount() {
         const response = await axios(`${this.baseUrl}${this.allMyBackendMovies}`)
         this.setState({
@@ -65,6 +70,7 @@ class AllMoviesContainer extends Component {
         }
     }
 
+    // PERSISTING MOVIE INFO TO DATABASE 
     addMovieInfo = async res => {
         const response = await axios.post(
             `${this.baseUrl}${this.movieToHome}`, 
@@ -82,10 +88,67 @@ class AllMoviesContainer extends Component {
                 production: res.data.Production
             },
         )
-        const movie = response.data.movie.data
-        this.setState(prevState => ({
-                movies: [movie, ...prevState.movies]
-        }))
+        this.validateMovie(response)
+    }
+
+    // VALIDATING IF MOVIE EXISTS ALREADY, OR IS EVEN A VALID MOVIE 
+    validateMovie = res => {
+        if (res.data.movie !== undefined) {
+            const movie = res.data.movie.data
+            let existingMovie = this.state.movies.find(mov => mov.id === movie.id)
+            if (existingMovie === undefined) {
+                this.setState(prevState => ({
+                    movies: [movie, ...prevState.movies]
+                }))
+            } else {
+                alert("Movie already exists")
+            }
+        } else {
+            alert("That movie doesn't exist")
+        }
+    }
+
+    // ALLOWING FOR MOVIES TO BE SORTED, AND THEN RE-RENDERED 
+    sortMovies = movies => {
+        this.setState({
+            movies
+        })
+    }
+
+    sortAZ = () => {
+        const fromA_Z = this.state.movies.sort((a, b) => {
+            let aTitle = a.attributes.title
+            let bTitle = b.attributes.title
+            return aTitle.localeCompare(bTitle)
+        }) 
+        this.sortMovies(fromA_Z)
+    }
+
+    sortZA = () => {
+        const fromZ_A = this.state.movies.sort((a, b) => {
+            let aTitle = a.attributes.title
+            let bTitle = b.attributes.title
+            return aTitle.localeCompare(bTitle)
+        }).reverse() 
+        this.sortMovies(fromZ_A)
+    }
+
+    sortOldest = () => {
+        const byYear = this.state.movies.sort((a, b) => {
+            let aYear = a.attributes.release_year.split(' ').slice(-1)[0]
+            let bYear = b.attributes.release_year.split(' ').slice(-1)[0]
+            return aYear.localeCompare(bYear)
+        })
+        this.sortMovies(byYear)
+    }
+
+    sortMostRecent = () => {
+        const byYear = this.state.movies.sort((a, b) => {
+            let aYear = a.attributes.release_year.split(' ').slice(-1)[0]
+            let bYear = b.attributes.release_year.split(' ').slice(-1)[0]
+            return aYear.localeCompare(bYear)
+        }).reverse()
+        this.sortMovies(byYear)
     }
 
     render() {
@@ -95,11 +158,29 @@ class AllMoviesContainer extends Component {
                 <Header />
                 <div className="movies-container">
                     <div className="homepage">
-                        <div className="search-form">
-                            <SearchForm validateEndpointThenRequestMovieInfo={this.validateEndpointThenRequestMovieInfo}/>
+                        <div className="sort_and_search">
+                            <div className="sort_buttons">
+                                <ul>
+                                    <li className="most_recent">
+                                        <SortMostRecent sortMostRecent={this.sortMostRecent} />
+                                    </li>
+                                    <li className="by-yea">
+                                        <SortOldestButton sortOldest={this.sortOldest} />
+                                    </li>
+                                    <li className="sort_in_asc">
+                                        <SortASCButton sortAZ={this.sortAZ} />
+                                    </li>
+                                    <li className="sort_in_desc">
+                                        <SortDESCButton sortZA={this.sortZA} />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="search-form">
+                                <SearchForm validateEndpointThenRequestMovieInfo={this.validateEndpointThenRequestMovieInfo}/>
+                            </div>
                         </div>
                         <div className="home-movie-list">
-                            <MovieList movies={movies} />
+                            <MovieList movies={movies} sortMovies={this.sortMovies} />
                         </div>
                     </div>
                 </div>
