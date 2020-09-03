@@ -2,6 +2,7 @@ li.movie-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   cursor: pointer;
 }
 
@@ -20,8 +21,162 @@ li.movie-info div.poster img {
 }
 
 li.movie-info div.content {
-  color: #fff;
   display: none;
+  color: #fff;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 100;
+  overflow-y: scroll;
+  background-color: rgba(0, 0, 0, 0.815);
+  padding: 30px;
+  width: 250px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee46;
+  margin-bottom: 10px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info div.modal_poster {
+  width: 150px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info div.modal_poster img {
+  width: 100%;
+}
+
+li.movie-info div.content div.modal_poster_vital_info div.vital_info {
+  margin-left: 10px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info p.movie_title {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info p {
+  font-size: 1rem;
+  width: 300px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info p:not(:first-child) {
+  margin-top: 5px;
+}
+
+li.movie-info div.content div.modal_poster_vital_info strong {
+  color: red;
+}
+
+li.movie-info div.content div.country_and_language {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 5vh;
+  margin-bottom: 15px;
+}
+
+li.movie-info div.content div.country_and_language div.language {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+li.movie-info div.content div.country_and_language div.language .language-icon {
+  font-size: 1.5rem;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+li.movie-info div.content div.synopsis {
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eeeeee46;
+}
+
+li.movie-info div.content div.synopsis h2 {
+  margin-bottom: 10px;
+}
+
+li.movie-info div.content div.synopsis p {
+  line-height: 1.5;
+}
+
+li.movie-info div.content div.rating_nominate_button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+li.movie-info div.content div.rating_nominate_button div.rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.3rem;
+}
+
+li.movie-info div.content div.rating_nominate_button div.rating .imdb {
+  color: yellow;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+li.movie-info div.content div.rating_nominate_button div.nominate_button {
+  height: 45px;
+  width: 150px;
+  border-radius: 6px;
+}
+
+li.movie-info div.content div.rating_nominate_button div.nominate_button button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  color: #eeeeee;
+  border-radius: 5px;
+}
+
+li.movie-info div.content div.rating_nominate_button div.nominate_button:hover {
+  -webkit-animation: nominateButtonAnimation .5s ease-in-out .1s forwards;
+          animation: nominateButtonAnimation .5s ease-in-out .1s forwards;
+}
+
+li.movie-info div.content div.rating_nominate_button div.nominate_button:hover button {
+  color: red;
+  -webkit-transition: color .5s linear;
+  transition: color .5s linear;
+}
+
+li.movie-info div.content div.rating_nominate_button div.nominate_button:not(:hover) {
+  -webkit-animation: nominateButtonLeaveAnimation .5s ease-in-out .1s forwards;
+          animation: nominateButtonLeaveAnimation .5s ease-in-out .1s forwards;
+}
+
+li.movie-info div.content div.rating_nominate_button div.nominate_button:not(:hover) button {
+  color: #eeeeee;
+  -webkit-transition: color .5s linear;
+  transition: color .5s linear;
 }
 
 @-webkit-keyframes posterAnimation {
@@ -51,5 +206,117 @@ li.movie-info div.content {
   }
   100% {
     opacity: .7;
+  }
+}
+
+@-webkit-keyframes movieContentModal {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  25% {
+    width: 250px;
+    height: 150px;
+  }
+  50% {
+    width: 500px;
+    height: 250px;
+  }
+  100% {
+    width: 700px;
+    height: 400px;
+    display: block;
+  }
+}
+
+@keyframes movieContentModal {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  25% {
+    width: 250px;
+    height: 150px;
+  }
+  50% {
+    width: 500px;
+    height: 250px;
+  }
+  100% {
+    width: 700px;
+    height: 400px;
+    display: block;
+  }
+}
+
+@-webkit-keyframes nominateButtonAnimation {
+  0% {
+    border: 0;
+  }
+  25% {
+    border-left: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-right: 3px solid red;
+  }
+  100% {
+    border-bottom: 3px solid red;
+  }
+}
+
+@keyframes nominateButtonAnimation {
+  0% {
+    border: 0;
+  }
+  25% {
+    border-left: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-right: 3px solid red;
+  }
+  100% {
+    border-bottom: 3px solid red;
+  }
+}
+
+@-webkit-keyframes nominateButtonLeaveAnimation {
+  0% {
+    border-bottom: 0;
+  }
+  25% {
+    border-right: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-left: 3px solid red;
+  }
+  100% {
+    border: 2px solid #fff;
+  }
+}
+
+@keyframes nominateButtonLeaveAnimation {
+  0% {
+    border-bottom: 0;
+  }
+  25% {
+    border-right: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-left: 3px solid red;
+  }
+  100% {
+    border: 2px solid #fff;
   }
 }

@@ -1,5 +1,6 @@
 li.movie-info {
     display: flex;
+    position: relative;
     cursor: pointer;
     div.poster {
         width: 175px;
@@ -13,8 +14,115 @@ li.movie-info {
         }
     }
     div.content {
-        color: #fff;
         display: none;
+        color: #fff;
+        border-radius: 10px;
+        position: absolute;
+        z-index: 100;
+        overflow-y: scroll;
+        background-color: rgba(0, 0, 0, 0.815);
+        padding: 30px;
+        width: 250px;
+        div.modal_poster_vital_info {
+            display: flex;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eeeeee46;
+            margin-bottom: 10px;
+            div.modal_poster {
+                width: 150px;
+                img {
+                    width: 100%;
+                }
+            }
+            div.vital_info {
+                margin-left: 10px;
+            }
+            p.movie_title {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+            p {
+                font-size: 1rem;
+                width: 300px;
+                &:not(:first-child) {
+                    margin-top: 5px;
+                }
+            }
+            strong {
+                color: red;
+            }
+        }
+        div.country_and_language {
+            display: flex;
+            align-items: center;
+            height: 5vh;
+            margin-bottom: 15px;
+            div.language {
+                display: flex;
+                align-items: center;
+                .language-icon {
+                    font-size: 1.5rem;
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+        }
+        div.synopsis {
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eeeeee46;
+            h2 {
+                margin-bottom: 10px;
+            }
+            p {
+                line-height: 1.5;
+            }
+        }
+        div.rating_nominate_button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            div.rating {
+                display: flex;
+                align-items: center;
+                font-size: 1.3rem;
+                .imdb {
+                    color: yellow;
+                    font-size: 2rem;
+                    margin-right: 10px;
+                }
+            }
+            div.nominate_button {
+                height: 45px;
+                width: 150px;
+                border-radius: 6px;
+                button {
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    border: 0;
+                    background-color: transparent;
+                    height: 100%;
+                    width: 100%;
+                    color: #eeeeee;
+                    border-radius: 5px;
+                }
+                &:hover {
+                    animation: nominateButtonAnimation .5s ease-in-out .1s forwards;
+                    button {
+                        color: red;
+                        transition: color .5s linear;
+                    }
+                }
+                &:not(:hover) {
+                    animation: nominateButtonLeaveAnimation .5s ease-in-out .1s forwards;
+                    button {
+                        color: #eeeeee;
+                        transition: color .5s linear;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -30,5 +138,61 @@ li.movie-info {
     }
     100% {
         opacity: .7;
+    }
+}
+
+@keyframes movieContentModal {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    25% {
+        width: 250px;
+        height: 150px;
+    }
+    50% {
+        width: 500px;
+        height: 250px;
+    }
+    100% {
+        width: 700px;
+        height: 400px;
+        display: block;
+    }
+}
+
+@keyframes nominateButtonAnimation {
+    0% {
+        border: 0
+    }
+    25% {
+        border-left: 3px solid red;
+    }
+    50% {
+        border-top: 3px solid red;
+    }
+    75% {
+        border-right: 3px solid red;
+    }
+    100% {
+        border-bottom: 3px solid red;
+    }
+}
+
+@keyframes nominateButtonLeaveAnimation {
+    0% {
+        border-bottom: 0
+    }
+    25% {
+        border-right: 3px solid red;
+    }
+    50% {
+        border-top: 3px solid red;
+    }
+    75% {
+        border-left: 3px solid red;
+    }
+    100% {
+        border: 2px solid #fff;
     }
 }
