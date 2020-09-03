@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AllMoviesContainer from './Pages/Home/AllMovies/containers/AllMoviesContainer';
 import EntryPage from './Pages/LoginSIgnupPage/containers/EntryPage';
 import Header from './Global/components/Header';
@@ -6,6 +6,26 @@ import { Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
 function App() {
+
+  const [loggedInStatus, setLoggedInStatus] = useState(false)
+  const [user, setUser] = useState({})
+
+  const checkLoggedInStatus = async () => {
+    const response = await axios.get("http://localhost:3001/logged_in", {
+      withCredentials: true
+    })
+    if (response.data.logged_in && loggedInStatus === false) {
+      setLoggedInStatus(true)
+      setUser(response.data.user)
+    } else if (!response.data.logged_in && loggedInStatus === true) {
+      setLoggedInStatus(false)
+      setUser({})
+    }
+  }
+
+  useEffect(() => {
+    checkLoggedInStatus()
+  })
 
   const handleLoginRequest = async (email, password) => {
     const response = await axios
@@ -16,6 +36,12 @@ function App() {
     )
     console.log(response)
   }
+
+  const handleLogoutRequest = async () => {
+    const response = await axios.delete('http://localhost:3001/logout')
+    console.log(response)
+  }
+
   return (
     <div className="App">
         <Switch>

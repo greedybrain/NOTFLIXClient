@@ -22,7 +22,6 @@ li.movie-info {
         overflow-y: scroll;
         background-color: rgba(0, 0, 0, 0.815);
         padding: 30px;
-        width: 250px;
         div.modal_poster_vital_info {
             display: flex;
             padding-bottom: 20px;
@@ -147,16 +146,16 @@ li.movie-info {
         height: 0;
     }
     25% {
-        width: 250px;
-        height: 150px;
+        width: 300px;
+        height: 300px;
     }
     50% {
-        width: 500px;
-        height: 250px;
+        width: 400px;
+        height: 400px;
     }
     100% {
-        width: 700px;
-        height: 400px;
+        width: 500px;
+        height: 500px;
         display: block;
     }
 }

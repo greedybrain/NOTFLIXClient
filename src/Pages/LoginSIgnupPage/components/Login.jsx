@@ -28,6 +28,7 @@ const Login = ({ toggleForm, handleLoginRequest, history, loginStatus }) => {
                         type="email"
                         placeholder="Email"
                         value={email}
+                        required
                     />
                 </div>
                 <div className="password">
@@ -36,6 +37,7 @@ const Login = ({ toggleForm, handleLoginRequest, history, loginStatus }) => {
                         type="password"
                         placeholder="Password"
                         value={password}
+                        required
                     />
                 </div>
                 <div className="submit-btn">

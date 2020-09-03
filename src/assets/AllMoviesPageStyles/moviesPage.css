@@ -156,7 +156,7 @@ div.movies-page-wrapper div.movies-container div.homepage div.home-movie-list {
 
 @-webkit-keyframes sortButtonAnimation {
   0% {
-    border: 1px solid #eeeeee1f;
+    border: 3px solid #eeeeee1f;
   }
   25% {
     border-left: 3px solid red;
@@ -174,7 +174,7 @@ div.movies-page-wrapper div.movies-container div.homepage div.home-movie-list {
 
 @keyframes sortButtonAnimation {
   0% {
-    border: 1px solid #eeeeee1f;
+    border: 3px solid #eeeeee1f;
   }
   25% {
     border-left: 3px solid red;
