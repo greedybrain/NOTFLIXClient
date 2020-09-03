@@ -8,7 +8,7 @@ const Header = () => {
         <header>
             <div className="logo-area">
                 <div className="logo">
-                    <Logo />
+                    <Link to="/all_movies"><Logo /></Link>
                 </div>
                 <div className="home">
                     <NavLink to='/all_movies' activeClassName="active-nav">Movies</NavLink>
