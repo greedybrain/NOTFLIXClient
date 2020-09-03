@@ -1,39 +1,106 @@
 div.movies-page-wrapper {
   background-color: #242424;
+  min-width: 900px;
 }
 
 div.movies-page-wrapper header {
-  padding-top: 3px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 3px;
+  margin-bottom: 20px;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form {
-  position: relative;
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 8vh;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  padding: 0 75px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 30px;
+  margin-bottom: 20px;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li {
+  height: 30px;
+  border-radius: 4px;
+  color: #eeeeee;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li button {
+  width: 80px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #eeeeee;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li:not(:first-child) {
+  margin-left: 10px;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li:hover {
+  -webkit-animation: sortButtonAnimation .5s ease-in-out .1s forwards;
+          animation: sortButtonAnimation .5s ease-in-out .1s forwards;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li:hover button {
+  color: red;
+  -webkit-transition: color .5s linear;
+  transition: color .5s linear;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li:not(:hover) {
+  -webkit-animation: sortButtonLeaveAnimation .5s ease-in-out .1s forwards;
+          animation: sortButtonLeaveAnimation .5s ease-in-out .1s forwards;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul li:not(:hover) button {
+  color: #eeeeee;
+  -webkit-transition: color .5s linear;
+  transition: color .5s linear;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form {
+  position: relative;
+  height: 8vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div {
   width: 250px;
   height: 45px;
   border-radius: 30px;
   border: 1px solid #eeeeee;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div input {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div input {
   width: 100%;
   height: 100%;
   outline: none;
@@ -45,32 +112,32 @@ div.movies-page-wrapper div.movies-container div.homepage div.search-form form d
   text-align: center;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div input::-webkit-input-placeholder {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div input::-webkit-input-placeholder {
   font-size: .9rem;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div input:-ms-input-placeholder {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div input:-ms-input-placeholder {
   font-size: .9rem;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div input::-ms-input-placeholder {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div input::-ms-input-placeholder {
   font-size: .9rem;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div input::placeholder {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div input::placeholder {
   font-size: .9rem;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div:not(:first-child) {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div:not(:first-child) {
   margin-left: 15px;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div.submit-button {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div.submit-button {
   width: 45px;
   border: 2px solid #fff;
 }
 
-div.movies-page-wrapper div.movies-container div.homepage div.search-form form div.submit-button button {
+div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.search-form form div.submit-button button {
   width: 100%;
   height: 100%;
   border-radius: 19px;
@@ -85,4 +152,76 @@ div.movies-page-wrapper div.movies-container div.homepage div.home-movie-list {
   height: 82vh;
   padding: 30px;
   overflow-y: scroll;
+}
+
+@-webkit-keyframes sortButtonAnimation {
+  0% {
+    border: 1px solid #eeeeee1f;
+  }
+  25% {
+    border-left: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-right: 3px solid red;
+  }
+  100% {
+    border-bottom: 3px solid red;
+  }
+}
+
+@keyframes sortButtonAnimation {
+  0% {
+    border: 1px solid #eeeeee1f;
+  }
+  25% {
+    border-left: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-right: 3px solid red;
+  }
+  100% {
+    border-bottom: 3px solid red;
+  }
+}
+
+@-webkit-keyframes sortButtonLeaveAnimation {
+  0% {
+    border-bottom: 0;
+  }
+  25% {
+    border-right: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-left: 3px solid red;
+  }
+  100% {
+    border: 3px solid #eeeeee1f;
+  }
+}
+
+@keyframes sortButtonLeaveAnimation {
+  0% {
+    border-bottom: 0;
+  }
+  25% {
+    border-right: 3px solid red;
+  }
+  50% {
+    border-top: 3px solid red;
+  }
+  75% {
+    border-left: 3px solid red;
+  }
+  100% {
+    border: 3px solid #eeeeee1f;
+  }
 }

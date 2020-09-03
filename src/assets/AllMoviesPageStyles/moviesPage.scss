@@ -1,54 +1,100 @@
 div.movies-page-wrapper {
     background-color: #242424;
+    min-width: 900px;
     header {
-        padding-top: 3px;
+        position: sticky;
+        top: 3px;
+        margin-bottom: 20px;
     }
     div.movies-container {
         div.homepage {
-            div.search-form {
-                position: relative;
+            div.sort_and_search {
                 display: flex;
                 align-items: center;
-                height: 8vh;
-                justify-content: space-around;
-                padding: 0 75px;
-                form {
-                    display: flex;
-                    div {
-                        width: 250px;
-                        height: 45px;
-                        border-radius: 30px;
-                        border: 1px solid #eeeeee;
-                        input {
-                            width: 100%;
-                            height: 100%;
-                            outline: none;
-                            border: none;
-                            border-radius: 40px;
-                            background-color: #242424;
-                            color: #fff;
-                            font-size: 1rem;
-                            text-align: center;
-                            &::placeholder {
-                                font-size: .9rem;
+                justify-content: space-between;
+                padding: 0 30px;
+                margin-bottom: 20px;
+                div.sort_buttons {
+                    ul {
+                        display: flex;
+                        align-items: center;
+                        li {
+                            height: 30px;
+                            border-radius: 4px;
+                            color: #eeeeee;
+                            button {
+                                width: 80px;
+                                outline: none;
+                                border: none;
+                                cursor: pointer;
+                                height: 100%;
+                                background-color: transparent;
+                                border-radius: 3px;
+                                color: #eeeeee;
+                            }
+                            &:not(:first-child) {
+                                margin-left: 10px;
+                            }
+                            &:hover {
+                                animation: sortButtonAnimation .5s ease-in-out .1s forwards;
+                                button {
+                                    color: red;
+                                    transition: color .5s linear;
+                                }
+                            }
+                            &:not(:hover) {
+                                animation: sortButtonLeaveAnimation .5s ease-in-out .1s forwards;
+                                button {
+                                    color: #eeeeee;
+                                    transition: color .5s linear;
+                                }
                             }
                         }
-                        &:not(:first-child) {
-                            margin-left: 15px;
-                        }
                     }
-                    div.submit-button {
-                        width: 45px;
-                        border: 2px solid #fff;
-                        button {
-                            width: 100%;
-                            height: 100%;
-                            border-radius: 19px;
-                            outline: none;
-                            border: none;
-                            background-color: #242424;
-                            color: #fff;
-                            cursor: pointer;
+                }
+                div.search-form {
+                    position: relative;
+                    height: 8vh;
+                    display: flex;
+                    align-items: center;
+                    form {
+                        display: flex;
+                        div {
+                            width: 250px;
+                            height: 45px;
+                            border-radius: 30px;
+                            border: 1px solid #eeeeee;
+                            input {
+                                width: 100%;
+                                height: 100%;
+                                outline: none;
+                                border: none;
+                                border-radius: 40px;
+                                background-color: #242424;
+                                color: #fff;
+                                font-size: 1rem;
+                                text-align: center;
+                                &::placeholder {
+                                    font-size: .9rem;
+                                }
+                            }
+                            &:not(:first-child) {
+                                margin-left: 15px;
+                            }
+                        }
+                        div.submit-button {
+                            width: 45px;
+                            border: 2px solid #fff;
+                            button {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 19px;
+                                outline: none;
+                                border: none;
+                                background-color: #242424;
+                                color: #fff;
+                                cursor: pointer;
+                            }
                         }
                     }
                 }
@@ -59,5 +105,41 @@ div.movies-page-wrapper {
                 overflow-y: scroll;
             }
         }
+    }
+}
+
+@keyframes sortButtonAnimation {
+    0% {
+        border: 1px solid #eeeeee1f;
+    }
+    25% {
+        border-left: 3px solid red;
+    }
+    50% {
+        border-top: 3px solid red;
+    }
+    75% {
+        border-right: 3px solid red;
+    }
+    100% {
+        border-bottom: 3px solid red;
+    }
+}
+
+@keyframes sortButtonLeaveAnimation {
+    0% {
+        border-bottom: 0
+    }
+    25% {
+        border-right: 3px solid red;
+    }
+    50% {
+        border-top: 3px solid red;
+    }
+    75% {
+        border-left: 3px solid red;
+    }
+    100% {
+        border: 3px solid #eeeeee1f;
     }
 }
