@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AllMoviesContainer from './Pages/Home/AllMovies/containers/AllMoviesContainer';
 import EntryPage from './Pages/LoginSIgnupPage/containers/EntryPage';
-import Header from './Global/components/Header';
-import { Switch, Route } from 'react-router-dom'
+// import Header from './Global/components/Header';
+import { Switch, Route, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
       setUser({})
     }
   }
-
+  
   useEffect(() => {
     checkLoggedInStatus()
   })
@@ -34,12 +34,13 @@ function App() {
         { email, password },
         { withCredentials: true }
     )
-    console.log(response)
+    setUser(response.data)
+    console.log(user)
   }
 
   const handleLogoutRequest = async () => {
-    const response = await axios.delete('http://localhost:3001/logout')
-    console.log(response)
+    await axios.delete('http://localhost:3001/logout')
+    setUser({})
   }
 
   return (
@@ -50,7 +51,7 @@ function App() {
             exact
             path="/all_movies"
             render={
-              props => <AllMoviesContainer {...props} />
+              props => <AllMoviesContainer loggedInStatus={loggedInStatus} {...props} />
             }
         />
         
@@ -59,7 +60,7 @@ function App() {
             exact
             path="/"
             render={
-              props => <EntryPage {...props} handleLoginRequest={handleLoginRequest}  />
+              props => loggedInStatus === true ? <Redirect to="/all_movies" /> : <EntryPage {...props} handleLoginRequest={handleLoginRequest}  />
             }
           />
         </Switch>
