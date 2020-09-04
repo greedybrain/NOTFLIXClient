@@ -2,6 +2,7 @@ li.movie-info {
     display: flex;
     position: relative;
     cursor: pointer;
+    width: 175px;
     div.poster {
         width: 175px;
         p {
@@ -22,6 +23,7 @@ li.movie-info {
         overflow-y: scroll;
         background-color: rgba(0, 0, 0, 0.815);
         padding: 30px;
+        width: 100%;
         div.modal_poster_vital_info {
             display: flex;
             padding-bottom: 20px;

@@ -1,6 +1,5 @@
 ul.movie-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    grid-column-gap: 10px;
-    grid-row-gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }

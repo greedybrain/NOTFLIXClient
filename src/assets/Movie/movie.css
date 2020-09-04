@@ -4,6 +4,7 @@ li.movie-info {
   display: flex;
   position: relative;
   cursor: pointer;
+  width: 175px;
 }
 
 li.movie-info div.poster {
@@ -29,6 +30,7 @@ li.movie-info div.content {
   overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.815);
   padding: 30px;
+  width: 100%;
 }
 
 li.movie-info div.content div.modal_poster_vital_info {
@@ -319,3 +321,4 @@ li.movie-info div.content div.rating_nominate_button div.nominate_button:not(:ho
     border: 2px solid #fff;
   }
 }
+/*# sourceMappingURL=movie.css.map */
