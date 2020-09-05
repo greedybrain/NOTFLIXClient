@@ -1,11 +1,6 @@
 div.movies-page-wrapper {
     background-color: #242424;
     min-width: 900px;
-    header {
-        position: sticky;
-        top: 3px;
-        margin-bottom: 20px;
-    }
     div.movies-container {
         div.homepage {
             div.sort_and_search {
@@ -13,7 +8,6 @@ div.movies-page-wrapper {
                 align-items: center;
                 justify-content: space-between;
                 padding: 0 30px;
-                margin-bottom: 20px;
                 div.sort_buttons {
                     ul {
                         display: flex;
