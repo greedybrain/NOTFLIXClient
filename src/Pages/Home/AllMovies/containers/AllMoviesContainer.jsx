@@ -155,7 +155,7 @@ class AllMoviesContainer extends Component {
         let { movies } = this.state
         return (
             <div className="movies-page-wrapper">
-                <Header />
+                <Header loggedInStatus={this.props.loggedInStatus} user={this.props.user} handleLogoutRequest={this.props.handleLogoutRequest} />
                 <div className="movies-container">
                     <div className="homepage">
                         <div className="sort_and_search">

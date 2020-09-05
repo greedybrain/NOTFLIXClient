@@ -3,7 +3,29 @@ import { Logo } from './Logo'
 import '../../assets/Header/header.css'
 import { Link, NavLink } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ loggedInStatus,  handleLogoutRequest, user }) => {
+
+    const renderCorrectNavItems = () => {
+        if(loggedInStatus === true) {
+            return (
+                <>
+                    {/* <li style={{ backgroundColor: 'transparent', color: '#fff' }}>{ user.user.username }</li> */}
+                    {/* <li style={{ backgroundColor: 'transparent', color: '#fff' }}>{ user.movies.length }</li> */}
+                    <li onClick={handleLogoutRequest} style={{ cursor: 'pointer', color: '#fff' }}>Logout</li>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <li><Link to='/' >Login</Link></li> 
+                    <li><Link to='/' >Sign Up</Link></li>
+                </>
+            )
+        }
+    }
+
+    const navItems = renderCorrectNavItems()
+
     return (
         <header>
             <div className="logo-area">
@@ -16,8 +38,7 @@ const Header = () => {
             </div>
             <div className="nav">
                 <ul>
-                    <li><Link to='/' >Login</Link></li>
-                    <li><Link to='/' >Sign Up</Link></li>
+                    {navItems}
                 </ul>
             </div>
         </header>

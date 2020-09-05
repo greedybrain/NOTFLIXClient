@@ -36,7 +36,14 @@ export default class EntryPage extends Component {
                     <Header />
                     <div className="entry-forms">
                         <div className="login-form" ref={this.loginForm}>
-z                            <Login loginForm={this.loginForm} signupForm={this.signupForm} toggleForm={this.toggleForm} handleLoginRequest={this.props.handleLoginRequest} history={this.props.history} /> 
+                            <Login 
+                                loginForm={this.loginForm} 
+                                signupForm={this.signupForm} 
+                                toggleForm={this.toggleForm} 
+                                handleLoginRequest={this.props.handleLoginRequest} 
+                                history={this.props.history} 
+                                loggedInStatus={this.props.loggedInStatus}
+                            /> 
                         </div>
                         <div className="signup-form" ref={this.signupForm} style={{ display: 'none' }}>
                             <Signup loginForm={this.loginForm} signupForm={this.signupForm} toggleForm={this.toggleForm} />

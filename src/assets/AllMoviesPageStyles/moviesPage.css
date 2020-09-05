@@ -3,13 +3,6 @@ div.movies-page-wrapper {
   min-width: 900px;
 }
 
-div.movies-page-wrapper header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 3px;
-  margin-bottom: 20px;
-}
-
 div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -21,7 +14,6 @@ div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 0 30px;
-  margin-bottom: 20px;
 }
 
 div.movies-page-wrapper div.movies-container div.homepage div.sort_and_search div.sort_buttons ul {

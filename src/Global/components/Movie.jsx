@@ -25,12 +25,12 @@ const Movie = ({ movie }) => {
         <li key={movie.id} className="movie-info" onClick={handleContentRenderOnClick} onMouseLeave={handleHideContentOnMouseLeave}>
             <div className="poster" onMouseEnter={lowerOpacityOnMouseEnter} onMouseLeave={increaseOpacityOnMouseLeave}>
                 <p title={movie.attributes.title}>{ movie.attributes.title.length > 7 ? movie.attributes.title.slice(0, 8) + '...' :  movie.attributes.title}</p>
-                <img src={movie.attributes.poster} alt={ movie.attributes.title}/>
+                <img src={movie.attributes.poster === 'N/A' ? '/images/poster-nA.jpg' : movie.attributes.poster} alt={ movie.attributes.title}/>
             </div>
             <div className="content" ref={refContent}>
                 <div className="modal_poster_vital_info">
                     <div className="modal_poster">
-                        <img src={movie.attributes.poster} alt={ movie.attributes.title}/>
+                        <img src={movie.attributes.poster === 'N/A' ? '/images/poster-nA.jpg' : movie.attributes.poster} alt={ movie.attributes.title}/>
                     </div>
                     <div className="vital_info">
                         <p className="movie_title">{movie.attributes.title}</p>
