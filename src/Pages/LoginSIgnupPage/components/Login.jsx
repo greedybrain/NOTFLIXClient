@@ -1,6 +1,7 @@
 import React, { useState, } from 'react'
+import axios from 'axios'
 
-const Login = ({ toggleForm, handleLoginRequest, history, loginStatus }) => {
+const Login = ({ toggleForm, handleLogin }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -12,9 +13,10 @@ const Login = ({ toggleForm, handleLoginRequest, history, loginStatus }) => {
         setPassword(event.target.value)
     }
 
-    const handleSubmit = event => {
-        handleLoginRequest(email, password)
-        history.replace('/all_movies')
+    const handleSubmit = async event => {
+        handleLogin(email, password)
+        setEmail('')
+        setPassword('')
         event.preventDefault()
     }
 
