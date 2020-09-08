@@ -4,10 +4,7 @@ import MovieList from '../../../../Global/components/MovieList'
 import SearchForm from '../components/SearchForm'
 import Header from '../../../../Global/components/Header'
 import '../../../../assets/AllMoviesPageStyles/moviesPage.css'
-import SortASCButton from '../components/SortASCButton'
-import SortDESCButton from '../components/SortDESCButton'
-import SortOldestButton from '../components/SortOldestButton'
-import SortMostRecent from '../components/SortMostRecent'
+import SortContainer from '../components/SortContainer'
 
 class AllMoviesContainer extends Component {
     constructor(props) {
@@ -115,72 +112,55 @@ class AllMoviesContainer extends Component {
         })
     }
 
-    sortAZ = () => {
-        const fromA_Z = this.state.movies.sort((a, b) => {
-            let aTitle = a.attributes.title
-            let bTitle = b.attributes.title
-            return aTitle.localeCompare(bTitle)
-        }) 
-        this.sortMovies(fromA_Z)
-    }
-
-    sortZA = () => {
-        const fromZ_A = this.state.movies.sort((a, b) => {
-            let aTitle = a.attributes.title
-            let bTitle = b.attributes.title
-            return aTitle.localeCompare(bTitle)
-        }).reverse() 
-        this.sortMovies(fromZ_A)
-    }
-
-    sortOldest = () => {
-        const byYear = this.state.movies.sort((a, b) => {
-            let aYear = a.attributes.release_year.split(' ').slice(-1)[0]
-            let bYear = b.attributes.release_year.split(' ').slice(-1)[0]
-            return aYear.localeCompare(bYear)
-        })
-        this.sortMovies(byYear)
-    }
-
-    sortMostRecent = () => {
-        const byYear = this.state.movies.sort((a, b) => {
-            let aYear = a.attributes.release_year.split(' ').slice(-1)[0]
-            let bYear = b.attributes.release_year.split(' ').slice(-1)[0]
-            return aYear.localeCompare(bYear)
-        }).reverse()
-        this.sortMovies(byYear)
+    handleUserSavesMovie = async res => {
+        // debugger
+        try {
+            const response = await axios.post(
+                `http://localhost:3001/api/v1/users/1/movies`,
+                {
+                    title: res.title,
+                    actors: res.actors,
+                    genre: res.genre,
+                    language: res.language,
+                    country: res.country,
+                    plot: res.plot,
+                    poster: res.poster,
+                    runtime: res.runtime,
+                    release_year: res.release_year,
+                    imdb_rating: res.imdb_rating,
+                    production: res.production
+                },
+                { withCredentials: true }
+            )
+            const warning = response.data.warning ? response.data.warning : null
+            if (warning) {
+                alert(warning)
+            }
+        } catch(e) {
+            console.log(e)
+        }
     }
 
     render() {
         let { movies } = this.state
         return (
             <div className="movies-page-wrapper">
-                <Header loggedInStatus={this.props.loggedInStatus} user={this.props.user} handleLogoutRequest={this.props.handleLogoutRequest} />
                 <div className="movies-container">
+                    <Header 
+                        loggedInStatus={this.props.loggedInStatus} 
+                        user={this.props.user} 
+                        handleLogout={this.props.handleLogout} />
                     <div className="homepage">
                         <div className="sort_and_search">
                             <div className="sort_buttons">
-                                <ul>
-                                    <li className="most_recent">
-                                        <SortMostRecent sortMostRecent={this.sortMostRecent} />
-                                    </li>
-                                    <li className="by-yea">
-                                        <SortOldestButton sortOldest={this.sortOldest} />
-                                    </li>
-                                    <li className="sort_in_asc">
-                                        <SortASCButton sortAZ={this.sortAZ} />
-                                    </li>
-                                    <li className="sort_in_desc">
-                                        <SortDESCButton sortZA={this.sortZA} />
-                                    </li>
-                                </ul>
+                                <SortContainer movies={movies} sortMovies={this.sortMovies} />
                             </div>
                             <div className="search-form">
                                 <SearchForm validateEndpointThenRequestMovieInfo={this.validateEndpointThenRequestMovieInfo}/>
                             </div>
                         </div>
                         <div className="home-movie-list">
-                            <MovieList movies={movies} sortMovies={this.sortMovies} />
+                            <MovieList movies={movies} sortMovies={this.sortMovies} user={this.props.user} handleUserSavesMovie={this.handleUserSavesMovie} />
                         </div>
                     </div>
                 </div>

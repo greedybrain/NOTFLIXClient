@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import '../../assets/Movie/movie.css'
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, handleUserSavesMovie }) => {
     const refContent = useRef(null)
 
     const lowerOpacityOnMouseEnter = event => {
@@ -51,7 +51,6 @@ const Movie = ({ movie }) => {
                         </div>
                         <div className="lang">
                             <p>{movie.attributes.language}</p>
-                            
                         </div>
                     </div>
                 </div>
@@ -69,7 +68,7 @@ const Movie = ({ movie }) => {
                         </div>
                     </div>
                     <div className="nominate_button">
-                        <button>Nominate</button>
+                        <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
                     </div>
                 </div>
             </div>

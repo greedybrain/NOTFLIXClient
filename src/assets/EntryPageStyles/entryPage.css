@@ -13,7 +13,7 @@ div.entry-page-bg {
 
 div.entry-page-bg-overlay {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
@@ -23,7 +23,7 @@ div.entry-page-bg-overlay {
 
 div.entry-page-fg {
   position: absolute;
-  z-index: 2;
+  z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
@@ -35,6 +35,9 @@ div.entry-page-fg div.entry-forms {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -56,6 +59,8 @@ div.entry-page-fg div.entry-forms form {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  top: 30px;
 }
 
 div.entry-page-fg div.entry-forms form div.fields-wrapper {

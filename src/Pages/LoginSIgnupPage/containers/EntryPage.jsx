@@ -23,30 +23,30 @@ export default class EntryPage extends Component {
         }
     }
 
-    handleSignupRequest = () => {
-       // fetch to signup endpoint
-    }
-
     render() {
         return (
             <>
                 <div className="entry-page-bg"></div>
                 <div className="entry-page-bg-overlay"></div>
                 <div className="entry-page-fg">
-                    <Header />
                     <div className="entry-forms">
                         <div className="login-form" ref={this.loginForm}>
                             <Login 
                                 loginForm={this.loginForm} 
                                 signupForm={this.signupForm} 
-                                toggleForm={this.toggleForm} 
-                                handleLoginRequest={this.props.handleLoginRequest} 
-                                history={this.props.history} 
-                                loggedInStatus={this.props.loggedInStatus}
+                                toggleForm={this.toggleForm}
+                                history={this.props.history}
+                                handleLogin={this.props.handleLogin}
                             /> 
                         </div>
                         <div className="signup-form" ref={this.signupForm} style={{ display: 'none' }}>
-                            <Signup loginForm={this.loginForm} signupForm={this.signupForm} toggleForm={this.toggleForm} />
+                            <Signup 
+                                loginForm={this.loginForm} 
+                                signupForm={this.signupForm} 
+                                toggleForm={this.toggleForm}
+                                history={this.props.history} 
+                                handleSuccessfulAuth={this.handleSuccessfulAuth} 
+                            />
                         </div>
                     </div>
                 </div>
