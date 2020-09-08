@@ -2,16 +2,18 @@ import React from 'react'
 import { Logo } from './Logo'
 import '../../assets/Header/header.css'
 import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
 
-const Header = ({ loggedInStatus,  handleLogoutRequest, user }) => {
+const Header = ({ loggedInStatus,  handleLogout, user, history }) => {
 
     const renderCorrectNavItems = () => {
-        if(loggedInStatus === true) {
+        if(loggedInStatus === "LOGGED_IN") {
+            console.log(user.username)
             return (
                 <>
-                    {/* <li style={{ backgroundColor: 'transparent', color: '#fff' }}>{ user.user.username }</li> */}
-                    {/* <li style={{ backgroundColor: 'transparent', color: '#fff' }}>{ user.movies.length }</li> */}
-                    <li onClick={handleLogoutRequest} style={{ cursor: 'pointer', color: '#fff' }}>Logout</li>
+                    <li style={{ backgroundColor: 'transparent', color: '#fff' }}>{ user.email }</li>
+                    <li style={{ backgroundColor: 'transparent', color: '#000' }}>{ user.movies }</li>
+                    <li onClick={handleLogout} style={{ cursor: 'pointer', color: '#fff' }}>Logout</li>
                 </>
             )
         } else {
