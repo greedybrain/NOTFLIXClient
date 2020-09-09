@@ -8,6 +8,9 @@ import axios from 'axios'
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('NOT_LOGGED_IN')
   const [user, setUser] = useState({})
+  const [userMovies, setUserMovies] = useState([])
+  const [username, setUsername] = useState('')
+  const [userId, setUserId] = useState('')
   const history = useHistory()
 
   const checkLoggedInStatus = async () => {
@@ -17,16 +20,20 @@ function App() {
       })
       if (response.data.logged_in && loggedInStatus === "NOT_LOGGED_IN") {
         setLoggedInStatus('LOGGED_IN')
-        setUser(response.data)
-
+        setUser(response.data.user)
+        setUserMovies(response.data.user.movies)
+        setUsername(response.data.user.username)
+        setUserId(response.data.user.id)
       } else if (!response.data.logged_in && loggedInStatus === "LOGGED_IN") {
         setLoggedInStatus('NOT_LOGGED_IN')
         setUser({})
+        setUserMovies([])
+        setUsername('')
+        setUserId('')
       }
     } catch (e) {
       console.log(e)
     }
-    console.log(user, loggedInStatus)
   }
 
   useEffect(() => {
@@ -42,6 +49,9 @@ function App() {
       )
       setLoggedInStatus("LOGGED_IN")
       setUser(response.data)
+      setUserMovies(response.data.user.data.attributes.movies)
+      setUsername(response.data.user.data.attributes.username)
+      setUserId(response.data.user.data.id)
       this.props.history.replace('/all_movies')
     } catch(e) {
       console.log(e)
@@ -55,6 +65,9 @@ function App() {
       })
       setLoggedInStatus("NOT_LOGGED_IN")
       setUser({})
+      setUserMovies([])
+      setUsername('')
+      setUserId('')
     } catch(e) {
       console.log(e)
     }
@@ -62,19 +75,19 @@ function App() {
 
   return (
     <div className="App">
-        {/* <Header 
-          loggedInStatus={loggedInStatus} 
-          user={user} 
-          handleLogout={handleLogout} 
-          history={history}
-        /> */}
         <Switch>
           {/* Route to all movies page  */}
           <Route
             exact
             path="/all_movies"
             render={
-              props => <AllMoviesContainer {...props} loggedInStatus={loggedInStatus} user={user} handleLogout={handleLogout} history={history}/>
+              props => <AllMoviesContainer {...props} 
+              loggedInStatus={loggedInStatus} 
+              username={username} 
+              userMovies={userMovies}
+              handleLogout={handleLogout}
+              userId={userId}
+              />
             }
           />
         

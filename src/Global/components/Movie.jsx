@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import '../../assets/Movie/movie.css'
 
-const Movie = ({ movie, handleUserSavesMovie }) => {
+const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) => {
     const refContent = useRef(null)
 
     const lowerOpacityOnMouseEnter = event => {
@@ -21,6 +21,8 @@ const Movie = ({ movie, handleUserSavesMovie }) => {
         refContent.current.style.display = "none"
     }
 
+    const foundId = movie.attributes.movie_users.find(mov => mov.user_id == userId)
+        
     return (
         <li key={movie.id} className="movie-info" onClick={handleContentRenderOnClick} onMouseLeave={handleHideContentOnMouseLeave}>
             <div className="poster" onMouseEnter={lowerOpacityOnMouseEnter} onMouseLeave={increaseOpacityOnMouseLeave}>
@@ -51,7 +53,7 @@ const Movie = ({ movie, handleUserSavesMovie }) => {
                         </div>
                         <div className="lang">
                             <p>{movie.attributes.language}</p>
-                        </div>
+                        </div> 
                     </div>
                 </div>
                 <div className="synopsis">
@@ -68,7 +70,16 @@ const Movie = ({ movie, handleUserSavesMovie }) => {
                         </div>
                     </div>
                     <div className="nominate_button">
-                        <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
+                        {
+                            foundId == (null || undefined) ? 
+
+                            <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
+                            
+                            :
+                            
+                            <button onClick={() => handleUserDeletesMovie(movie.id)}>Remove</button>
+                            
+                        }
                     </div>
                 </div>
             </div>

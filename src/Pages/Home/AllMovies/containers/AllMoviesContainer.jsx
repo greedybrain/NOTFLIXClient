@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import MovieList from '../../../../Global/components/MovieList'
 import SearchForm from '../components/SearchForm'
-import Header from '../../../../Global/components/Header'
 import '../../../../assets/AllMoviesPageStyles/moviesPage.css'
 import SortContainer from '../components/SortContainer'
+import Header from '../../../../Global/components/Header'
 
 class AllMoviesContainer extends Component {
     constructor(props) {
@@ -115,27 +115,45 @@ class AllMoviesContainer extends Component {
     handleUserSavesMovie = async res => {
         // debugger
         try {
-            const response = await axios.post(
-                `http://localhost:3001/api/v1/users/1/movies`,
-                {
-                    title: res.title,
-                    actors: res.actors,
-                    genre: res.genre,
-                    language: res.language,
-                    country: res.country,
-                    plot: res.plot,
-                    poster: res.poster,
-                    runtime: res.runtime,
-                    release_year: res.release_year,
-                    imdb_rating: res.imdb_rating,
-                    production: res.production
-                },
+            if (this.props.loggedInStatus === "LOGGED_IN") {
+                const response = await axios.post(
+                    `http://localhost:3001/api/v1/users/${this.props.userId}/movies`,
+                    {
+                        title: res.title,
+                        actors: res.actors,
+                        genre: res.genre,
+                        language: res.language,
+                        country: res.country,
+                        plot: res.plot,
+                        poster: res.poster,
+                        runtime: res.runtime,
+                        release_year: res.release_year,
+                        imdb_rating: res.imdb_rating,
+                        production: res.production
+                    },
+                    { withCredentials: true }
+                )
+                const warning = response.data.warning ? response.data.warning : null
+                if (warning) {
+                    alert(warning)
+                }
+                window.location.reload()
+            } else {
+                alert("You must be logged in to do that")
+                this.props.history.push('/')
+            }
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
+    handleUserDeletesMovie = async movieId => {
+        try {
+            const response = await axios.delete(
+                `http://localhost:3001/api/v1/users/${this.props.userId}/movies/${movieId}`, 
                 { withCredentials: true }
             )
-            const warning = response.data.warning ? response.data.warning : null
-            if (warning) {
-                alert(warning)
-            }
+            console.log(response)
         } catch(e) {
             console.log(e)
         }
@@ -146,10 +164,13 @@ class AllMoviesContainer extends Component {
         return (
             <div className="movies-page-wrapper">
                 <div className="movies-container">
-                    <Header 
+                    <Header
                         loggedInStatus={this.props.loggedInStatus} 
-                        user={this.props.user} 
-                        handleLogout={this.props.handleLogout} />
+                        userId={this.props.userId}
+                        username={this.props.username} 
+                        userMovies={this.props.userMovies}
+                        handleLogout={this.props.handleLogout}
+                    />
                     <div className="homepage">
                         <div className="sort_and_search">
                             <div className="sort_buttons">
@@ -160,7 +181,7 @@ class AllMoviesContainer extends Component {
                             </div>
                         </div>
                         <div className="home-movie-list">
-                            <MovieList movies={movies} sortMovies={this.sortMovies} user={this.props.user} handleUserSavesMovie={this.handleUserSavesMovie} />
+                            <MovieList movies={movies} sortMovies={this.sortMovies} handleUserSavesMovie={this.handleUserSavesMovie} handleUserDeletesMovie={this.handleUserDeletesMovie} userMovies={this.props.userMovies} userId={this.props.userId} />
                         </div>
                     </div>
                 </div>

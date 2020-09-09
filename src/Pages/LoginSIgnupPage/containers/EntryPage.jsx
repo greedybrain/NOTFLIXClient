@@ -27,6 +27,7 @@ export default class EntryPage extends Component {
         return (
             <>
                 <div className="entry-page-bg"></div>
+                <Header />
                 <div className="entry-page-bg-overlay"></div>
                 <div className="entry-page-fg">
                     <div className="entry-forms">
