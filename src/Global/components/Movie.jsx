@@ -21,7 +21,7 @@ const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) 
         refContent.current.style.display = "none"
     }
 
-    const foundId = movie.attributes.movie_users.find(mov => mov.user_id == userId)
+    // const foundId = movie.attributes.users.find(mov => mov.user_id == userId)
         
     return (
         <li key={movie.id} className="movie-info" onClick={handleContentRenderOnClick} onMouseLeave={handleHideContentOnMouseLeave}>
@@ -70,7 +70,8 @@ const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) 
                         </div>
                     </div>
                     <div className="nominate_button">
-                        {
+                        <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
+                        {/* {
                             foundId == (null || undefined) ? 
 
                             <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
@@ -79,7 +80,7 @@ const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) 
                             
                             <button onClick={() => handleUserDeletesMovie(movie.id)}>Remove</button>
                             
-                        }
+                        } */}
                     </div>
                 </div>
             </div>

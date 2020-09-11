@@ -85,6 +85,7 @@ function App() {
               loggedInStatus={loggedInStatus} 
               username={username} 
               userMovies={userMovies}
+              setUserMovies={setUserMovies}
               handleLogout={handleLogout}
               userId={userId}
               />

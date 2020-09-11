@@ -4,7 +4,7 @@ import MovieList from '../../../../Global/components/MovieList'
 import SearchForm from '../components/SearchForm'
 import '../../../../assets/AllMoviesPageStyles/moviesPage.css'
 import SortContainer from '../components/SortContainer'
-import Header from '../../../../Global/components/Header'
+import Header from '../../../../Global/components/Header' 
 
 class AllMoviesContainer extends Component {
     constructor(props) {
@@ -137,7 +137,7 @@ class AllMoviesContainer extends Component {
                 if (warning) {
                     alert(warning)
                 }
-                window.location.reload()
+                this.props.history.push('/all_movies')
             } else {
                 alert("You must be logged in to do that")
                 this.props.history.push('/')
@@ -153,10 +153,11 @@ class AllMoviesContainer extends Component {
                 `http://localhost:3001/api/v1/users/${this.props.userId}/movies/${movieId}`, 
                 { withCredentials: true }
             )
-            console.log(response)
         } catch(e) {
             console.log(e)
         }
+        const leftoverUserMovies = this.props.userMovies.filter(movie => movie.id  !== parseInt(movieId))
+        this.props.setUserMovies(leftoverUserMovies)
     }
 
     render() {
