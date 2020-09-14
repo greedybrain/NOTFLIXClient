@@ -1,21 +1,20 @@
+//! BUILT IN
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
+
+//! CUSTOM
 import { Logo } from './Logo'
 import '../../assets/Header/header.css'
-import { Link, NavLink, useHistory } from 'react-router-dom'
-import { useState } from 'react'
 import '../../assets/Header/header.css'
+import { logoutUserThunk } from '../../Store/middleware/authUsers'
 
-const Header = ({ loggedInStatus,  handleLogout, userId, username, userMovies }) => {
-    // const [bgColor, setBgColor] = useState({ backgroundColor: '' })
-    const history = useHistory()
-
-    // const setCorrectBgColor = () => {
-    //     if (history.location.pathname === '/') {
-    //         setBgColor({ backgroundColor: 'transparent' })
-    //     } else if(history.location.pathname === '/all_movies') {
-    //         setBgColor({ backgroundColor: '#242424' })
-    //     }
-    // }
+const Header = () => {
+    const user = useSelector(state => ({
+        status: state.userRed.loggedInStatus,
+        userInfo: state.userRed.userInfo
+    }))
+    const dispatch = useDispatch()
 
     return (
         <header>
@@ -31,16 +30,16 @@ const Header = ({ loggedInStatus,  handleLogout, userId, username, userMovies })
                 <ul>
                     {
 
-                        loggedInStatus === "LOGGED_IN" ? 
+                        user.status === "LOGGED_IN" ? 
                         
                         <>
                             <li style={{ backgroundColor: 'transparent', color: '#fff' }}>
-                                { username }
+                                { user.userInfo.data.attributes.username }
                             </li>
                             <li style={{ backgroundColor: 'transparent', color: '#fff' }}>
-                                { userMovies.length }
+                                { user.userInfo.data.attributes.movies.length }
                             </li>
-                            <li onClick={handleLogout} style={{ cursor: 'pointer', color: '#fff' }}>
+                            <li onClick={() => dispatch(logoutUserThunk())} style={{ cursor: 'pointer', color: '#fff' }}>
                                 Logout
                             </li>
                         </>
