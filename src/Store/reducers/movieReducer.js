@@ -14,93 +14,98 @@ export default function movieReducer(state = initialState, action) { //pure func
                                 ...state,
                                 loadMoviesRequest: true
                         }
+                case ADD_MOVIE_AFTER_SUCCESSFUL_REQUEST:
+                        return {
+                                ...state, 
+                                movies: action.payload.movies,
+                                loadMoviesRequest: false
+                        }
+                case SORT_MOVIES_A_Z:
+                        return {
+                                ...state,
+                                movies: [...action.payload.movies]
+                        }
+                case SORT_MOVIES_Z_A:
+                        return {
+                                ...state,
+                                movies: [...action.payload.movies]
+                        }
+                case SORT_MOVIES_MOST_RECENT:
+                        return {
+                                ...state,
+                                movies: [...action.payload.movies]
+                        }
+                case SORT_MOVIES_OLDEST:
+                        return {
+                                ...state,
+                                movies: [...action.payload.movies]
+                        }
+                case ADD_MOVIE:
+                        return {
+                                ...state,
+                                movies: [action.payload.movie, ...state.movies]
+                        }
+                default:
+                        return state
         }
 }
 
 // TYPES 
 const START_LOAD_MOVIES_REQUEST = "START_LOAD_MOVIES_REQUEST"
+const ADD_MOVIE_AFTER_SUCCESSFUL_REQUEST = "ADD_MOVIE_AFTER_SUCCESSFUL_REQUEST"
+const SORT_MOVIES_A_Z = "SORT_MOVIES_A_Z"
+const SORT_MOVIES_Z_A = "SORT_MOVIES_Z_A"
+const SORT_MOVIES_MOST_RECENT = "SORT_MOVIES__MOST_RECENT"
+const SORT_MOVIES_OLDEST = "SORT_MOVIES_OLDEST"
+const ADD_MOVIE = "ADD_MOVIE"
 
-// ACTION CREATORS
-const startLoadMoviesRequest = () => ({
-        type: START_LOAD_MOVIES
+//!ACTION CREATORS
+
+// LOADING MOVIES 
+export const startLoadMoviesRequest = () => ({ // used in middleware
+        type: START_LOAD_MOVIES_REQUEST
 })
 
-const addMoviesAfterSuccessfulRequest = movies => {
-        type:
-}
+export const addMoviesAfterSuccessfulRequest = movies => ({ // used in middleware
+        type: ADD_MOVIE_AFTER_SUCCESSFUL_REQUEST,
+        payload: {
+                movies
+        }
+})
 
-// this.state = {
-//         movies: [],
-//         title: '',
-//         year: ''
-// }
+// SORTING MOVIES 
+export const sortMoviesFromAtoZ = _movies => ({
+        type: SORT_MOVIES_A_Z,
+        payload: {
+                movies: _movies.sort((a, b) => a.attributes.title.localeCompare(b.attributes.title))
+        }
+})
 
-// // HANDLE SEARCH MOVIE BY TITLE AND YEAR 
-// movieByTitleAndYear = (title, year)  => {
-//         return `${this.thirdPartyBaseUrl}t=${title}&y=${year}&plot=full&apikey=${this.apiKey}`
-//     }
+export const sortMoviesFromZtoA = _movies => ({
+        type: SORT_MOVIES_Z_A,
+        payload: {
+                movies: _movies.sort((a, b) => a.attributes.title.localeCompare(b.attributes.title)).reverse()
+        }
+})
 
-//     // HANDLE SEARCH MOVIE BY TITLE
-//     movieByTitle = title => {
-//         return `${this.thirdPartyBaseUrl}t=${title}&plot=full&apikey=${this.apiKey}`
-//     }
+export const sortMoviesFromMostRecent = _movies => ({
+        type: SORT_MOVIES_MOST_RECENT,
+        payload: {
+                movies: _movies.sort((a, b) => a.attributes.release_year.split(' ').slice(-1)[0].localeCompare(b.attributes.release_year.split(' ').slice(-1)[0])).reverse()
+        }
+})
 
-//     // REQUESTING ADD MOVIE TO DATABASE ENDPOINT 
-//     addMovieToHomePath = () => {
-//         return `${this.baseUrl}${this.movieToHome}`
-//     }
+export const sortMoviesFromOldest = _movies => ({
+        type: SORT_MOVIES_OLDEST,
+        payload: {
+                movies: _movies.sort((a, b) => a.attributes.release_year.split(' ').slice(-1)[0].localeCompare(b.attributes.release_year.split(' ').slice(-1)[0]))
+        }
+})
 
-//     // VALIDATES ENDPOINT PARAMETERS BEFORE INFO IS RECEIVED
-//     validateEndpointThenRequestMovieInfo = async (title, year) => {
-//         let response;
-//         if (title === '') {
-//             alert("Please enter a title")
-//             return
-//         }
-//         if (title !== '' && year === '') {
-//             response = await axios(`${this.movieByTitle(title)}`)
-//             this.addMovieInfo(response)
-//         }
-//         if (title !== '' && year !== '') {
-//             response = await axios(`${this.movieByTitleAndYear(title, year)}`)
-//             this.addMovieInfo(response)
-//         }
-//     }
-
-//     // PERSISTING MOVIE INFO TO DATABASE 
-//     addMovieInfo = async res => {
-//         const response = await axios.post(
-//             `${this.baseUrl}${this.movieToHome}`, 
-//             {
-//                 title: res.data.Title,
-//                 actors: res.data.Actors,
-//                 genre: res.data.Genre,
-//                 language: res.data.Language,
-//                 country: res.data.Country,
-//                 plot: res.data.Plot,
-//                 poster: res.data.Poster,
-//                 runtime: res.data.Runtime,
-//                 release_year: res.data.Released,
-//                 imdb_rating: res.data.imdbRating,
-//                 production: res.data.Production
-//             },
-//         )
-//         this.validateMovie(response)
-//     }
-
-//     // VALIDATING IF MOVIE EXISTS ALREADY, OR IS EVEN A VALID MOVIE 
-//     validateMovie = res => {
-//         if (res.data.movie !== undefined) {
-//             const movie = res.data.movie.data
-//             let existingMovie = this.state.movies.find(mov => mov.id === movie.id)
-//             if (existingMovie === undefined) {
-//                 this.setState(prevState => ({
-//                     movies: [movie, ...prevState.movies]
-//                 }))
-//             } else {
-//                 alert("Movie already exists")
-//             }
-//         } else {
-//             alert("That movie doesn't exist")
-//         }
-//     }
+//ADDING MOVIE TO DATABASE THEN RERENDER MOVIE LIST
+export const addMovie = movie => ({
+        type: ADD_MOVIE,
+        payload: {
+                movie
+        }
+})

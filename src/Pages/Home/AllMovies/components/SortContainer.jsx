@@ -1,55 +1,24 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { sortMoviesFromAtoZ, sortMoviesFromZtoA, sortMoviesFromMostRecent, sortMoviesFromOldest } from '../../../../Store/reducers/movieReducer'
 
-const SortContainer = ({ movies, sortMovies }) => {
-    const sortAZ = () => {
-        const fromA_Z = movies.sort((a, b) => {
-            let aTitle = a.attributes.title
-            let bTitle = b.attributes.title
-            return aTitle.localeCompare(bTitle)
-        }) 
-        sortMovies(fromA_Z)
-    }
-
-    const sortZA = () => {
-        const fromZ_A = movies.sort((a, b) => {
-            let aTitle = a.attributes.title
-            let bTitle = b.attributes.title
-            return aTitle.localeCompare(bTitle)
-        }).reverse() 
-        sortMovies(fromZ_A)
-    }
-
-    const sortOldest = () => {
-        const byYear = movies.sort((a, b) => {
-            let aYear = a.attributes.release_year.split(' ').slice(-1)[0]
-            let bYear = b.attributes.release_year.split(' ').slice(-1)[0]
-            return aYear.localeCompare(bYear)
-        })
-        sortMovies(byYear)
-    }
-
-    const sortMostRecent = () => {
-        const byYear = movies.sort((a, b) => {
-            let aYear = a.attributes.release_year.split(' ').slice(-1)[0]
-            let bYear = b.attributes.release_year.split(' ').slice(-1)[0]
-            return aYear.localeCompare(bYear)
-        }).reverse()
-        sortMovies(byYear)
-    }
+const SortContainer = () => {
+    const movies = useSelector(state => state.movieRed.movies)
+    const dispatch = useDispatch()
 
     return (
         <ul>
-            <li className="most_recent">
-                <button onClick={sortMostRecent}>Newest</button>
-            </li>
-            <li className="by-yea">
-                <button onClick={sortOldest}>Oldest</button>
-            </li>
             <li className="sort_in_asc">
-                <button onClick={sortAZ}>A-Z</button>
+                <button onClick={() => dispatch(sortMoviesFromAtoZ(movies))}>A-Z</button>
             </li>
             <li className="sort_in_desc">
-                <button onClick={sortZA}>Z-A</button>
+                <button onClick={() => dispatch(sortMoviesFromZtoA(movies))}>Z-A</button>
+            </li>
+            <li className="most_recent">
+                <button onClick={() => dispatch(sortMoviesFromMostRecent(movies))}>Newest</button>
+            </li>
+            <li className="by-yea">
+                <button onClick={() => dispatch(sortMoviesFromOldest(movies))}>Oldest</button>
             </li>
         </ul>
     )

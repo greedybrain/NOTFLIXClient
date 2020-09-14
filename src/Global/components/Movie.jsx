@@ -1,7 +1,11 @@
 import React, { useRef } from 'react'
 import '../../assets/Movie/movie.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { userAddMovieToFavoritesThunk } from '../../Store/middleware/userMovies'
 
-const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) => {
+const Movie = ({ movie, handleUserDeletesMovie }) => {
+    const userInfo = useSelector(state => state.userRed.userInfo)
+    const dispatch = useDispatch()
     const refContent = useRef(null)
 
     const lowerOpacityOnMouseEnter = event => {
@@ -21,8 +25,8 @@ const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) 
         refContent.current.style.display = "none"
     }
 
-    // const foundId = movie.attributes.users.find(mov => mov.user_id == userId)
-        
+    // const foundId = movie.attributes.users.find(mov => mov.user_id == userInfo.data.id)
+
     return (
         <li key={movie.id} className="movie-info" onClick={handleContentRenderOnClick} onMouseLeave={handleHideContentOnMouseLeave}>
             <div className="poster" onMouseEnter={lowerOpacityOnMouseEnter} onMouseLeave={increaseOpacityOnMouseLeave}>
@@ -70,11 +74,11 @@ const Movie = ({ movie, handleUserSavesMovie, handleUserDeletesMovie, userId }) 
                         </div>
                     </div>
                     <div className="nominate_button">
-                        <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
+                        <button onClick={() => dispatch(userAddMovieToFavoritesThunk(movie.attributes))}>Nominate</button>
                         {/* {
                             foundId == (null || undefined) ? 
 
-                            <button onClick={() => handleUserSavesMovie(movie.attributes)}>Nominate</button>
+                            <button onClick={() => dispatch(userAddMovieToFavoritesThunk(movie.attributes))}>Nominate</button>
                             
                             :
                             

@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { validateEndpointThenRequestMovieInfo } from '../../../../Store/middleware/apiMovies'
     
-const SearchForm = ({ validateEndpointThenRequestMovieInfo }) => {
+const SearchForm = () => {
+    // HOOKS
     const [title, setTitle] = useState('')
     const [year, setYear] = useState('')
+    const dispatch = useDispatch()
 
+    // METHODS 
     const handleTitleChange = event => {
         setTitle(event.target.value)
     }
@@ -13,7 +18,7 @@ const SearchForm = ({ validateEndpointThenRequestMovieInfo }) => {
     }
 
     const handleSubmit = event => {
-        validateEndpointThenRequestMovieInfo(title, year)
+        dispatch(validateEndpointThenRequestMovieInfo(title, year))
         setTitle('')
         setYear('')
         

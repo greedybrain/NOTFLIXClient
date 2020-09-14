@@ -1,9 +1,11 @@
 import React, { useState, } from 'react'
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { loginUserThunk } from '../../../Store/middleware/authUsers'
 
-const Login = ({ toggleForm, handleLogin }) => {
+const Login = ({ toggleForm, history }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
 
     const handleEmailChange = event => {
         setEmail(event.target.value)
@@ -14,7 +16,7 @@ const Login = ({ toggleForm, handleLogin }) => {
     }
 
     const handleSubmit = async event => {
-        handleLogin(email, password)
+        dispatch(loginUserThunk(email, password))
         setEmail('')
         setPassword('')
         event.preventDefault()
