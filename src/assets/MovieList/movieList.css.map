@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,EAAE,AAAA,WAAW,CAAC;EACV,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,oCAAoC;EAC3D,GAAG,EAAE,IAAI;CACZ",
+    "mappings": "AAAA,AAAA,EAAE,AAAA,WAAW,CAAC;EACV,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,qCAAqC;EAC5D,GAAG,EAAE,IAAI;CACZ",
     "sources": [
         "movieList.scss"
     ],

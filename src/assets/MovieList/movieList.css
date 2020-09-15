@@ -1,8 +1,8 @@
 ul.movie-list {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(165px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  -ms-grid-columns: (minmax(165px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
   gap: 10px;
 }
 /*# sourceMappingURL=movieList.css.map */

@@ -4,10 +4,12 @@ import '../../assets/MovieList/movieList.css'
 import { useSelector } from 'react-redux'
 
 const MovieList = () => {
-    const movies = useSelector(state => state.movieRed.movies)
+    const state = useSelector(state => ({
+        movies: state.movieRed.movies
+    }))
     
-    const renderMovies = movies.map(movie => {
-        return <Movie key={movie.id} movie={movie}  />
+    const renderMovies = state.movies.map(movie => {
+        return <Movie key={movie.id} movie={movie} />
     })
     return (
         <ul className="movie-list">

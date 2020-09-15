@@ -34,10 +34,10 @@ const Header = () => {
                         
                         <>
                             <li style={{ backgroundColor: 'transparent', color: '#fff' }}>
-                                { user.userInfo.data.attributes.username }
+                                { user.userInfo.attributes.username }
                             </li>
                             <li style={{ backgroundColor: 'transparent', color: '#fff' }}>
-                                { user.userInfo.data.attributes.movies.length }
+                                { user.userInfo.attributes.movies.length }
                             </li>
                             <li onClick={() => dispatch(logoutUserThunk())} style={{ cursor: 'pointer', color: '#fff' }}>
                                 Logout

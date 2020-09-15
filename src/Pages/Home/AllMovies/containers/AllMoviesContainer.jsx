@@ -77,7 +77,7 @@ class AllMoviesContainer extends Component {
                             </div>
                         </div>
                         <div className="home-movie-list">
-                            <MovieList handleUserSavesMovie={this.handleUserSavesMovie} handleUserDeletesMovie={this.handleUserDeletesMovie} userMovies={this.props.userMovies} userId={this.props.userId} />
+                            <MovieList />
                         </div>
                     </div>
                 </div>

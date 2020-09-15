@@ -8,7 +8,10 @@ export const helper = {
                 addMovieToBackend: 'api/v1/add_movie_home',
                 addMovie: userId => {
                         return `users/${userId}/movies`
-                }
+                },
+                deleteMovie: (userId, movieId) => {
+                        return `users/${userId}/movies/${movieId}`
+                },
         },
         thirdPartyEP: {
                 apiKey: '691b7eac',

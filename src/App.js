@@ -7,7 +7,8 @@ import { checkLoggedInStatus } from './Store/middleware/authUsers';
 
 function App() {
   const user = useSelector(state => ({
-    status: state.userRed.loggedInStatus
+    status: state.userRed.loggedInStatus,
+    userInfo: state.userRed.userInfo
   }))
   const dispatch = useDispatch()
 

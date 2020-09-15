@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import '../../assets/Movie/movie.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { userAddMovieToFavoritesThunk } from '../../Store/middleware/userMovies'
+import { userAddMovieToFavoritesThunk, userRemovesMovieFromFavoritesThunk } from '../../Store/middleware/userMovies'
 
 const Movie = ({ movie, handleUserDeletesMovie }) => {
     const userInfo = useSelector(state => state.userRed.userInfo)
@@ -25,7 +25,10 @@ const Movie = ({ movie, handleUserDeletesMovie }) => {
         refContent.current.style.display = "none"
     }
 
-    // const foundId = movie.attributes.users.find(mov => mov.user_id == userInfo.data.id)
+    const getUserIdIfExistant = () => {
+        const foundId = movie.attributes.favorited_movies.find(mov => mov.user_id == userInfo.id)
+        return foundId
+    }
 
     return (
         <li key={movie.id} className="movie-info" onClick={handleContentRenderOnClick} onMouseLeave={handleHideContentOnMouseLeave}>
@@ -74,17 +77,17 @@ const Movie = ({ movie, handleUserDeletesMovie }) => {
                         </div>
                     </div>
                     <div className="nominate_button">
-                        <button onClick={() => dispatch(userAddMovieToFavoritesThunk(movie.attributes))}>Nominate</button>
-                        {/* {
-                            foundId == (null || undefined) ? 
+                        {/* <button onClick={() => dispatch(userAddMovieToFavoritesThunk(movie.attributes))}>Nominate</button> */}
+                        {
+                            getUserIdIfExistant() === (null || undefined) ? 
 
                             <button onClick={() => dispatch(userAddMovieToFavoritesThunk(movie.attributes))}>Nominate</button>
                             
                             :
                             
-                            <button onClick={() => handleUserDeletesMovie(movie.id)}>Remove</button>
+                            <button onClick={() => dispatch(userRemovesMovieFromFavoritesThunk(movie))}>Remove</button>
                             
-                        } */}
+                        }
                     </div>
                 </div>
             </div>

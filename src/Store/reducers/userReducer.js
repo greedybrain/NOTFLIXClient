@@ -36,6 +36,11 @@ export default  function userReducer(state = initialState, action) { //pure func
                                 ...state,
                                 userMovies: [action.payload.movie, ...state.userMovies]
                         }
+                case USER_REMOVES_MOVIE_FROM_FAVORITES: 
+                        return {
+                                ...state,
+                                userMovies: action.payload.userMovies
+                        }
                 default: 
                         return state
         }
@@ -47,6 +52,7 @@ const LOGIN_USER = "LOGIN_USER"
 const LOGOUT_USER = "LOGOUT_USER"
 const USER_ADD_MOVIE_TO_FAVORITES = "USER_ADD_MOVIE_TO_FAVORITES"
 const LOAD_USERS_FAVORITE_MOVIES = "LOAD_USERS_FAVORITE_MOVIES"
+const USER_REMOVES_MOVIE_FROM_FAVORITES = "USER_REMOVES_MOVIE_FROM_FAVORITES"
 
 //! ACTION CREATORS
 export const validateLoginStatusThenReloadUserInfo = (userInfo, isLoggedIn) => ({
@@ -84,3 +90,13 @@ export const userAddMovieToFavorites = movie => ({
                 movie
         }
 })
+
+export const userRemovesMovieFromFavorites = (userMovies, movieId) => {
+        debugger
+        return {
+                type: USER_REMOVES_MOVIE_FROM_FAVORITES,
+                payload: {
+                        userMovies: userMovies.filter(mov => mov.id !== movieId)
+                }
+        }
+}

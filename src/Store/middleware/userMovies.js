@@ -1,15 +1,15 @@
 import axios from 'axios'
 import { helper } from '../../Utils/helper'
-import { userAddMovieToFavorites } from '../reducers/userReducer'
+import { userAddMovieToFavorites, userRemovesMovieFromFavorites } from '../reducers/userReducer'
 
-const { baseUrl, addMovie } = helper.myEndpoints
+const { baseUrl, addMovie, deleteMovie } = helper.myEndpoints
 
 export const userAddMovieToFavoritesThunk = movie => {
         return async (dispatch, getState) => {
                 try {
                         if(getState().userRed.loggedInStatus === 'LOGGED_IN') {
                                 const response = await axios.post(
-                                        `${baseUrl}api/v1/${addMovie(getState().userRed.userInfo.data.id)}`,
+                                        `${baseUrl}api/v1/${addMovie(getState().userRed.userInfo.id)}`,
                                         {
                                                 title: movie.title,
                                                 actors: movie.actors,
@@ -42,36 +42,17 @@ export const userAddMovieToFavoritesThunk = movie => {
         }
 }
 
-// handleUserSavesMovie = async res => {
-//         try {
-//             if (this.props.loggedInStatus === "LOGGED_IN") {
-//                 const response = await axios.post(
-//                     `http://localhost:3001/api/v1/users/${this.props.userId}/movies`,
-//                     {
-//                         title: res.title,
-//                         actors: res.actors,
-//                         genre: res.genre,
-//                         language: res.language,
-//                         country: res.country,
-//                         plot: res.plot,
-//                         poster: res.poster,
-//                         runtime: res.runtime,
-//                         release_year: res.release_year,
-//                         imdb_rating: res.imdb_rating,
-//                         production: res.production
-//                     },
-//                     { withCredentials: true }
-//                 )
-//                 const warning = response.data.warning ? response.data.warning : null
-//                 if (warning) {
-//                     alert(warning)
-//                 }
-//                 this.props.history.push('/all_movies')
-//             } else {
-//                 alert("You must be logged in to do that")
-//                 this.props.history.push('/')
-//             }
-//         } catch(e) {
-//             console.log(e)
-//         }
-//     }
+export const userRemovesMovieFromFavoritesThunk = movie => {
+        return async (dispatch, getState) => {
+                try {
+                        const response = await axios.delete(
+                                `${baseUrl}api/v1/${deleteMovie(getState().userRed.userInfo.id, movie.id)}`,
+                                { withCredentials: true }
+                        )
+                        debugger
+                        dispatch(userRemovesMovieFromFavorites(getState().userRed.userMovies, movie))
+                } catch(e) {
+                        alert(e)
+                }
+        }
+}

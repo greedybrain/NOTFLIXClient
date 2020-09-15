@@ -15,8 +15,8 @@ export const checkLoggedInStatus = () => {
                                 { withCredentials: true }
                         )
                         if (response.data.logged_in && getState().userRed.loggedInStatus === "NOT_LOGGED_IN") {
-                                dispatch(validateLoginStatusThenReloadUserInfo(response.data.user, "LOGGED_IN"))
-                                dispatch(loadUsersFavoriteMovies(getState().userRed.userInfo.data.attributes.movies))
+                                dispatch(validateLoginStatusThenReloadUserInfo(response.data.user.data, "LOGGED_IN"))
+                                dispatch(loadUsersFavoriteMovies(getState().userRed.userInfo.attributes.movies))
                         } else if (!response.data.logged_in && getState().userRed.loggedInStatus === "LOGGED_IN") {
                                 dispatch(validateLoginStatusThenReloadUserInfo({}, "NOT_LOGGED_IN"))
                                 dispatch(loadUsersFavoriteMovies([]))
